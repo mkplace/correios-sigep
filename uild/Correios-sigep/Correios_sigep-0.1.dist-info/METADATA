@@ -1,0 +1,16 @@
+Metadata-Version: 2.0
+Name: Correios-sigep
+Version: 0.1
+Summary: mklace correios sigep integration
+Home-page: UNKNOWN
+Author: Bruno Casado
+Author-email: contato@brunocasado.me
+License: MIT
+Description-Content-Type: UNKNOWN
+Platform: UNKNOWN
+Requires-Dist: lxml
+Requires-Dist: zeep
+
+UNKNOWN
+
+
