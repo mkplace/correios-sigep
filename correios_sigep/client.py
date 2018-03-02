@@ -34,8 +34,10 @@ class Client:
         kwargs['senha'] = self.password
 
         fn = getattr(client.service, method)
-        node = client.create_message(client.service, method, **kwargs)
-        print etree.tostring(node, encoding='iso-8859-1'), 'NODE'
+        
+        # print envelope for debug purposes
+        # node = client.create_message(client.service, method, **kwargs)
+        # print etree.tostring(node, encoding='iso-8859-1'), 'NODE'
         result = fn(**kwargs)
         return result
 
