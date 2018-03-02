@@ -8,4 +8,4 @@ class Recipient(object):
         self.email_destinatario = email
         self.logradouro_destinatario = address
         self.complemento_destinatario = complement
-        self.numero_end_destinario = number
+        self.numero_end_destinatario = number
