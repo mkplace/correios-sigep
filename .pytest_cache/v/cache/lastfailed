@@ -2,5 +2,6 @@
   "tests/etree.py::test_xml_parse_dict": true, 
   "tests/tests.py::test_busca_cliente": true, 
   "tests/tests.py::test_fecha_plp": true, 
-  "tests/tests.py::test_get_range_tag": true
+  "tests/tests.py::test_get_range_tag": true, 
+  "tests/tests.py::test_verifica_disponibilidade_servico": true
 }
