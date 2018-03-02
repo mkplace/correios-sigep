@@ -32,17 +32,17 @@ class ObjectDimension(object):
 
     def _validate_values(self,
                          type_object,
-                         height=0,
-                         width=0,
-                         length=0,
-                         diameter=0):
+                         height=2,
+                         width=11,
+                         length=16,
+                         diameter=2):
 
         if type_object == self.PACKAGE:
-            if height < 1 and width < 1 and length < 1:
+            if height < 2 and width < 11 and length < 16:
                 raise Exception(
                     'Width, height and length are mandatory for object package types')
         elif type_object == self.CYLINDER:
-            if length < 1 and diameter < 1:
+            if length < 16 and diameter < 2:
                 raise Exception(
                     'length and diameter are mandatory for object package types')
 
