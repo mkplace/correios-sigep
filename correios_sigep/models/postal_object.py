@@ -1,16 +1,15 @@
 from ..utils.number import number_format
 class PostalObject(object):
 
-    def __init__(self, tag_number, service_code, weight, recipient, national,
+    def __init__(self, tag, service_code, weight, recipient, national,
                  additional_service, object_dimension, rt1='', rt2='', cubing=0.00):
 
         self.codigo_objeto_cliente = ''
         self.data_postagem_sara = ''
         self.status_processamento = 0
         self.numero_comprovante_postagem = ''
-
-
-        self.numero_etiqueta = tag_number
+        
+        self.numero_etiqueta = tag.tag_w_digit
         self.codigo_servico_postagem = service_code
         self.cubagem = number_format(cubing)
         self.peso = int(weight)
