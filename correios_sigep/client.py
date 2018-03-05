@@ -99,3 +99,10 @@ class Client:
         }
 
         return self._request("fechaPlpVariosServicos", **params)
+
+    def recover_xml_plp(self, id_plp):
+        params = {
+            'idPlpMaster': id_plp
+        }
+
+        return self._request("solicitaXmlPlp", **params)
