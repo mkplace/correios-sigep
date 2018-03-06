@@ -9,4 +9,4 @@ class AdditionalService(object):
     
     def addCode(self, code):
         # todo check availables codes
-        self.codigo_servico_adicional.append(code)
+        self.codigo_servico_adicional.append(str(code))
