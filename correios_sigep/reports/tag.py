@@ -81,7 +81,8 @@ class Tag(Generator):
             'recipient_comp': self.postal_object.destinatario.complemento_destinatario
             'recipient_neighborhood': self.postal_object.nacional.bairro_destinatario
             'recipient_city': self.postal_object.nacional.cidade_destinatario
-            'recipient_uf': self.postal_object.nacional.uf_destinatario
+            'recipient_uf': self.postal_object.nacional.uf_destinatario,
+            'recipient_zipcode': self.postal_object.nacional.uf_destinatario,
         }
         return super(Tag, self).render('etiqueta.html', **params)
 
