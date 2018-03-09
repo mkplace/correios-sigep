@@ -1,9 +1,13 @@
-from jinja2 import Environment, PackageLoader, select_autoescape
-
-class Generator:
-    def __init__(self, folder='templates'):
+from jinja2 import Environment, PackageLoader, select_autoescape, FileSystemLoader
+import os
+class Generator(object):
+    def __init__(self, folder=''):
+        if not folder:
+            path = os.path.abspath(__file__)
+            dir_path = os.path.dirname(path)
+            folder = '{}/templates/'.format(dir_path)
         self._env = Environment(
-            loader=PackageLoader('correios_sigep', folder),
+            loader=FileSystemLoader(folder),
             autoescape=select_autoescape(['html', 'xml'])
         )
 
