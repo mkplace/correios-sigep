@@ -150,7 +150,15 @@ def test_make_tag():
         'xml': xml_obj.getXml()
     }
 
-    tag = ReportTag(sender_obj, postalobject, '0067599079')
-    
+    tag = ReportTag(sender_obj, postalobject, '0067599079', '9912401862')
+    file = open('/home/mkplace-dev001/teste.html', 'w')
+    # file.flush()
+    import unicodedata
+
+    u_html = tag.render()
+    str_html = unicodedata.normalize('NFKD', u_html).encode('ascii', 'ignore')
+
+    file.write(str(str_html))
+    file.close()
     
     assert(1 == 2)
