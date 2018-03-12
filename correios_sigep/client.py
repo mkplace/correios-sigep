@@ -81,7 +81,8 @@ class Client:
             'qtdEtiquetas': kwargs['qtd'],
         }
 
-        return self._request('solicitaEtiquetas', **params)
+        list_tags = self._request('solicitaEtiquetas', **params).split(',')
+        return list_tags
 
     def get_checker_digit(self, zipcodes):
         params = {
