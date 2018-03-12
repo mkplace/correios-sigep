@@ -14,6 +14,8 @@ import re
 from io import BytesIO
 
 class Tag(Generator):
+    TYPE_4P = '4p.html'
+    TYPE_6P = '6p.html'
     def __init__(self, sender, postal_object, id_postcard, contract_id, volume={}, group = ''):
         super(Tag, self).__init__()
         self.str_datamatrix = ''
@@ -71,7 +73,7 @@ class Tag(Generator):
         bs = cb128.generate_barcode()
         return bs
         
-    def render(self):
+    def render(self, tag_type=TYPE_4P):
         params = {
             'datamatrix': self.str_datamatrix,
             'barcode_tag': self.img_barcode_tag,
@@ -96,7 +98,7 @@ class Tag(Generator):
 
         }
 
-        return super(Tag, self).render('etiqueta.html', **params)
+        return super(Tag, self).render(tag_type, **params)
 
     @staticmethod
     def normalizeTag(tag):
