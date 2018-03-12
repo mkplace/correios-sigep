@@ -14,13 +14,15 @@ import re
 from io import BytesIO
 
 class Tag(Generator):
-    def __init__(self, sender, postal_object, id_postcard, contract_id, group = ''):
+    def __init__(self, sender, postal_object, id_postcard, contract_id, volume={}, group = ''):
         super(Tag, self).__init__()
         self.str_datamatrix = ''
         self.logo = ''
         self.contract_id = contract_id
         self.id_postcard = id_postcard
         self.postal_object = postal_object
+        self.sender = sender
+        self.volume = volume
 
         if not isinstance(sender, Sender):
             raise Exception(
@@ -32,7 +34,6 @@ class Tag(Generator):
 
         self.str_datamatrix = self.generateDataMatrix(sender, postal_object, id_postcard)
         
-        tag = self.normalizeTag(postal_object.numero_etiqueta)
         self.img_barcode_tag = b64encode(self.generate_barcode_128(postal_object.numero_etiqueta, 300, 66, 1))
         self.img_barcode_zipcode = b64encode(self.generate_barcode_128(postal_object.nacional.cep_destinatario, 200, 66))
 
@@ -60,7 +61,7 @@ class Tag(Generator):
         self.mountStr(''.ljust(30, ' '))
 
         byte_io = BytesIO()
-        encoder = barcode('datamatrix', self.str_datamatrix, options= dict(), margin=0)
+        encoder = barcode('datamatrix', self.str_datamatrix, options = dict(), margin=0)
         encoder.save(byte_io, 'png')
         
         return b64encode(byte_io.getvalue())
@@ -77,13 +78,24 @@ class Tag(Generator):
             'barcode_cep': self.img_barcode_zipcode,
             'contract_id': self.contract_id,
             'recipient_name': self.postal_object.destinatario.nome_destinatario,
-            'recipient_address': '{},{}'.format(self.postal_object.destinatario.logradouro_destinatario, self.postal_object.destinatario.numero_end_destinatario),
-            'recipient_comp': self.postal_object.destinatario.complemento_destinatario
-            'recipient_neighborhood': self.postal_object.nacional.bairro_destinatario
-            'recipient_city': self.postal_object.nacional.cidade_destinatario
+            'recipient_address': '{}, {}'.format(self.postal_object.destinatario.logradouro_destinatario, self.postal_object.destinatario.numero_end_destinatario),
+            'recipient_comp': self.postal_object.destinatario.complemento_destinatario,
+            'recipient_neighborhood': self.postal_object.nacional.bairro_destinatario,
+            'recipient_city': self.postal_object.nacional.cidade_destinatario,
             'recipient_uf': self.postal_object.nacional.uf_destinatario,
-            'recipient_zipcode': self.postal_object.nacional.uf_destinatario,
+            'recipient_zipcode': self.postal_object.nacional.cep_destinatario,
+            'sender_address': '{}, {}'.format(self.sender.logradouro_remetente, self.sender.numero_remetente),
+            'sender_comp': self.sender.complemento_remetente,
+            'sender_neighborhood': self.sender.bairro_remetente,
+            'sender_zipcode': self.sender.cep_remetente,
+            'sender_city': '{}/{}'.format(self.sender.cidade_remetente, self.sender.uf_remetente),
+            'total_volume': self.volume['total_volume'],
+            'current_volume': self.volume['current_volume'],
+            'weight': self.volume['weight'],
+            'tag': self.normalizeTag(self.postal_object.numero_etiqueta)
+
         }
+
         return super(Tag, self).render('etiqueta.html', **params)
 
     @staticmethod
