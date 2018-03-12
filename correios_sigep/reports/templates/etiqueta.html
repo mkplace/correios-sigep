@@ -39,11 +39,16 @@
             text-align: center
         }
 
+        .logo span {
+            text-align: left;
+        }
+
         .forward_simbol {
-            width: 20mm;
-            height: 20mm;
-            border: 1px solid black;
+            width: 25mm;
+            height: 14mm;
+            /* border: 1px solid black; */
             display: inline-block;
+            vertical-align: bottom
         }
 
         .dest_label {
@@ -51,13 +56,15 @@
             font-weight: bold;
             text-transform: uppercase;
         }
-        .dest_label::before {
-            content:'DESTINATÁRIO';
+        
+        .dest_label {
             background-color: black;
             color: white;
             padding: 5px;
             position: relative;
-            top: -3px
+            top: -2px;
+            display: inline;
+            -webkit-print-color-adjust: exact;
         }
         
         
@@ -83,6 +90,11 @@
 
         .receiver_info p {
             line-height: 5px;
+        }
+
+        .barcode_tag{
+            width: 300px;
+            text-align: center;
         }
 
         /* .barcode_cep img{
@@ -121,21 +133,38 @@
 <body>
     <div class="container">
         <section>
-            <div class="logo"></div>
+            <div class="logo">
+                <div>
+                    <img src="#" />
+                </div>
+                <div class="fs-9">
+                    <span>
+                        NF: 111 <br />
+                        Pedido: 00
+                    </span>
+                </div>
+            </div>
             <div class="data_matrix">
                 <div>
                     <img src="data:image/png;base64, {{ datamatrix }}" alt="">
                 </div>
                 <div class="fs-9">
-                    Contrato: <span><strong>{{ contract_id }}</strong></span><br>
-                    <strong>Sedex 10</strong>
+                    Contrato: <span><strong>{{ contract_id }}</strong></span>
                 </div>
             </div>
-            <div class="forward_simbol"></div>
+            <div class="forward_simbol">
+                <div class="fs-9">
+                    <span>
+                        Volume: {{ current_volume }}/{{ total_volume }} <br />
+                        Peso (g): <strong>{{ weight }}</strong>
+                    </span>
+                </div>
+            </div>
         </section>
         
         <section>
             <div class="barcode_tag">
+                <span class="fs-9"><strong>{{ tag }}</strong></span><br />
                 <img src="data:image/png;base64, {{ barcode_tag }}" alt="">
             </div>
             <div class="additional_services_id">
@@ -149,7 +178,7 @@
         <section class="recipient">
             <div class="sec">
                 <hr>
-                <div class="dest_label"></div>
+                <div class="dest_label">DESTINATÁRIO</div>
                 <div class="correios_logo"></div>
             </div>
             <div class="recipient_info">
@@ -170,7 +199,7 @@
             <p><strong>Remetente:</strong><span> Nome do remetente</span></p>
             <p>{{ sender_address }}</p>
             <p>{{ sender_comp }} <span>{{ sender_neighborhood }}</span></p>
-            <p><strong>{{ sender_zipcode }}</strong> <span>{{ sender_state }}-{{ sender.uf }}</span></p>
+            <p><strong>{{ sender_zipcode }}</strong> <span>{{ sender_city }}-{{ sender_uf }}</span></p>
         </section>
     </div>
 </body>
