@@ -18,13 +18,13 @@ from ..correios_sigep.reports.tag import Tag as ReportTag
 # mkplace@102030
 # def test_verifica_disponibilidade_servico():
 #     params = {
-#         'codAdministrativo': '17000190',
-#         'numeroServico': '41068',
+#         'codAdministrativo': '16244974',
+#         'numeroServico': '04162',
 #         'cepOrigem': '04089001',
 #         'cepDestino': '04313000'
-
 #     }
-#     client = Client('sigep', 'n5f9t8')
+
+#     client = Client('74558537000', '4wvp84', 'sigep-production')
 #     result = client.get_available_service(**params)
 #     print result, 'aaaaaaaaaaaaaaaaaaa'
 #     assert  1==2
@@ -36,7 +36,7 @@ from ..correios_sigep.reports.tag import Tag as ReportTag
 #     }
 
 #     # 74558537000108
-#     client = Client('16244974', '74558537', 'sigep-production')
+#     client = Client('74558537000', '4wvp84', 'sigep-production')
 #     result = client.get_card_services(**params)
     
 #     # print result, 'AAAAAAAAAAAAA'
@@ -48,12 +48,12 @@ from ..correios_sigep.reports.tag import Tag as ReportTag
 # def test_get_range_tag():
 #     params = {
 #         'recipient_type': 'C',
-#         'cnpj': '34028316000103',
-#         'service': '40096',
-#         'qtd': 10
+#         'cnpj': '74558537000108',
+#         'service': '04162',
+#         'qtd': 2
 #     }
 #     # SZ27437914 BR,SZ27437914 BR
-#     client = Client('sigep', 'n5f9t8')
+#     client = Client('74558537000', '4wvp84', 'sigep-production')
 #     result = client.get_range_tag(**params)
 #     print result, 'RANGE TAG'
 #     assert(1==2)
@@ -149,8 +149,8 @@ def test_make_tag():
         'list_tags': [tag.clean(tag.tag)],
         'xml': xml_obj.getXml()
     }
-
-    tag = ReportTag(sender_obj, postalobject, '0067599079', '9912401862')
+    volume = { 'current_volume': 1, 'total_volume': 1, 'weight': 1000 }
+    tag = ReportTag(sender_obj, postalobject, '0067599079', '9912401862', volume)
     file = open('/home/mkplace-dev001/teste.html', 'w')
     # file.flush()
     import unicodedata
