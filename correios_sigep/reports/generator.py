@@ -1,5 +1,8 @@
 from jinja2 import Environment, PackageLoader, select_autoescape, FileSystemLoader
 import os
+import pdfkit
+import tempfile
+
 class Generator(object):
     def __init__(self, folder=''):
         if not folder:
@@ -14,3 +17,10 @@ class Generator(object):
     def render(self, file_name, **params):
         tpl = self._env.get_template(file_name)
         return tpl.render(**params)
+
+    def makePdf(self, str, out=''):
+        if not out:
+            file = tempfile.NamedTemporaryFile(delete=False)
+
+        pdfkit.from_string(str, '{}'.format(file.name))
+        file.close()
