@@ -45,18 +45,18 @@ from ..correios_sigep.reports.tag import Tag as ReportTag
     
 #     assert(1==2)
 
-# def test_get_range_tag():
-#     params = {
-#         'recipient_type': 'C',
-#         'cnpj': '74558537000108',
-#         'service': '04162',
-#         'qtd': 2
-#     }
-#     # SZ27437914 BR,SZ27437914 BR
-#     client = Client('74558537000', '4wvp84', 'sigep-production')
-#     result = client.get_range_tag(**params)
-#     print result, 'RANGE TAG'
-#     assert(1==2)
+def test_get_range_tag():
+    params = {
+        'recipient_type': 'C',
+        'cnpj': '74558537000108',
+        'service': '04162',
+        'qtd': 2
+    }
+    # SZ27437914 BR,SZ27437914 BR
+    client = Client('74558537000', '4wvp84', 'sigep-production')
+    result = client.get_range_tag(**params)
+    print result, 'RANGE TAG'
+    assert(1==2)
 
 # def test_fecha_plp():
 #     client = Client('sigep', 'n5f9t8')
@@ -155,8 +155,9 @@ def test_make_tag():
     # file.flush()
     import unicodedata
 
-    u_html = tag.render()
+    u_html = tag.render(tag_type=ReportTag.TYPE_6P)
     str_html = unicodedata.normalize('NFKD', u_html).encode('ascii', 'ignore')
+    tag.makePdf(str_html)
 
     file.write(str(str_html))
     file.close()
