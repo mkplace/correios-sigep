@@ -13,6 +13,7 @@ from ..correios_sigep.utils.etree import parseDict
 from ..correios_sigep.models.tag import Tag
 from lxml import etree
 from ..correios_sigep.reports.tag import Tag as ReportTag
+from ..correios_sigep.reports.plp import Plp as ReportPlp
 
 # otbcomercial
 # mkplace@102030
@@ -113,53 +114,67 @@ def test_get_range_tag():
 #     print result, 'RANGE TAG'
 #     assert(1==2)
 
-def test_make_tag():
+# def test_make_tag():
     
     
-    tag = Tag('SZ27437914 BR')
-    tag.setDv('4')
+#     tag = Tag('SZ27437914 BR')
+#     tag.setDv('4')
 
-    plp = TagPlp.Plp('0067599079')
+#     plp = TagPlp.Plp('0067599079')
 
-    sender_obj = sender.Sender('9992157880', '72', '17000190', 'Bruno Casado',
-                  'Av. Leonardo da vinci', 146, 'Ap 31', 'Vl Guarani', 
-                  '04313000', 'Sao Paulo', 'SP', '11992590656', '', 'bagcnop@gmail.com')
+#     sender_obj = sender.Sender('9992157880', '72', '17000190', 'Bruno Casado',
+#                   'Av. Leonardo da vinci', 146, 'Ap 31', 'Vl Guarani', 
+#                   '04313000', 'Sao Paulo', 'SP', '11992590656', '', 'bagcnop@gmail.com')
 
-    recipient = Recipient('Wellington', '11992590656', '11992590656', 'wcesar@gmail.com', 'Rua samambaia', 438, 'AP 34')
+#     recipient = Recipient('Wellington', '11992590656', '11992590656', 'wcesar@gmail.com', 'Rua samambaia', 438, 'AP 34')
 
-    # objetos de postagem
-    national = National(sender_obj.bairro_remetente, sender_obj.cidade_remetente, sender_obj.uf_remetente, sender_obj.cep_remetente)
-    servicos = []
-    servico_adicional = AdditionalService(0.00)
-    servico_adicional.addCode('001')
-    servicos.append(servico_adicional)
+#     # objetos de postagem
+#     national = National(sender_obj.bairro_remetente, sender_obj.cidade_remetente, sender_obj.uf_remetente, sender_obj.cep_remetente)
+#     servicos = []
+#     servico_adicional = AdditionalService(0.00)
+#     servico_adicional.addCode('001')
+#     servicos.append(servico_adicional)
 
-    dimensao_objeto = ObjectDimension(ObjectDimension.ENVELOPE)
-    postalobject = postal_object.PostalObject(tag, '40215', '350', recipient, national, servico_adicional,  dimensao_objeto)
+#     dimensao_objeto = ObjectDimension(ObjectDimension.ENVELOPE)
+#     postalobject = postal_object.PostalObject(tag, '40215', '350', recipient, national, servico_adicional,  dimensao_objeto)
 
-    objeto_postal = []
-    objeto_postal.append(postalobject)
+#     objeto_postal = []
+#     objeto_postal.append(postalobject)
     
-    xml_obj = CorreiosLog(plp, sender_obj)
-    xml_obj.addPostalObject(postalobject)
+#     xml_obj = CorreiosLog(plp, sender_obj)
+#     xml_obj.addPostalObject(postalobject)
     
-    params = {
-        'id_plp': '12345',
-        'id_postcard': '0067599079',
-        'list_tags': [tag.clean(tag.tag)],
-        'xml': xml_obj.getXml()
-    }
-    volume = { 'current_volume': 1, 'total_volume': 1, 'weight': 1000 }
-    tag = ReportTag(sender_obj, postalobject, '0067599079', '9912401862', volume)
+#     params = {
+#         'id_plp': '12345',
+#         'id_postcard': '0067599079',
+#         'list_tags': [tag.clean(tag.tag)],
+#         'xml': xml_obj.getXml()
+#     }
+#     volume = { 'current_volume': 1, 'total_volume': 1, 'weight': 1000 }
+#     tag = ReportTag(sender_obj, postalobject, '0067599079', '9912401862', volume)
+#     file = open('/home/mkplace-dev001/teste.html', 'w')
+#     # file.flush()
+#     import unicodedata
+
+#     u_html = tag.render(tag_type=ReportTag.TYPE_6P)
+#     str_html = unicodedata.normalize('NFKD', u_html).encode('ascii', 'ignore')
+#     tag.makePdf(str_html)
+
+#     file.write(str(str_html))
+#     file.close()
+    
+#     assert(1 == 2)
+
+def test_make_plp():
+    report = ReportPlp('12345', 1234567)
     file = open('/home/mkplace-dev001/teste.html', 'w')
-    # file.flush()
+    
     import unicodedata
 
-    u_html = tag.render(tag_type=ReportTag.TYPE_6P)
+    u_html = report.render()
     str_html = unicodedata.normalize('NFKD', u_html).encode('ascii', 'ignore')
-    tag.makePdf(str_html)
 
     file.write(str(str_html))
     file.close()
-    
-    assert(1 == 2)
+
+    report.makePdf(u_html)
