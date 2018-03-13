@@ -4,6 +4,7 @@ class Tag:
         self._tag = tag
         self._tag_w_digit = ''
         self._dv = ''
+
     @property
     def tag(self):
         return self._tag
@@ -28,3 +29,13 @@ class Tag:
     @staticmethod
     def clean(tag):
         return tag.replace(' ', '')
+
+    def generate_dv(self):
+        prefix = self._tag[:2]
+        number = self._tag[2:11]
+        sufix = self._tag[11:13].strip()
+        ret = number.ljust(8, '0')[:8]
+
+        map(lambda(i,v): i*int(v) , enumerate(list(ret)))
+
+        
