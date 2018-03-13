@@ -16,32 +16,29 @@
         }
         .container {
             border: 2px solid black;
-            width: 321px;
+            width: 101.6mm;
+            padding:5px;
             /* height: 523px; */
+        }
+
+        .col {
+            display: inline-block;
+            vertical-align: top;
+            margin-right: 5px;
         }
         
         .logo, .data_matrix, .forward_simbol {
-            margin: 10px 0px 10px 30px;
             position: relative;
             vertical-align: top;
+
         }
 
         .data_matrix {
             top: -16px;
             z-index: -1;
+            width: 80px;
         }
 
-        .data_matrix img {
-            margin-left: 18px;
-        }
-
-        .logo, .data_matrix {
-            /* width: 25mm; */
-            height: 32mm;
-            /* border:1px solid black; */
-            display: inline-block;
-            text-align: center
-        }
 
         .logo span {
             text-align: left;
@@ -52,11 +49,11 @@
             height: 14mm;
             /* border: 1px solid black; */
             display: inline-block;
-            vertical-align: bottom
+            vertical-align: top
         }
 
         .dest_label {
-            font-size: 11pt;
+            font-size: 9pt;
             font-weight: bold;
             text-transform: uppercase;
         }
@@ -81,11 +78,7 @@
         }
 
         .recipient {
-            font-size: 11pt;
-        }
-
-        .recipient_info {
-            margin: 15px 20px;
+            font-size: 9pt;
         }
 
         .receiver_info {
@@ -99,6 +92,10 @@
         .barcode_tag{
             width: 300px;
             text-align: center;
+            position: relative;
+            top: -30px;
+            left: -10px;
+            z-index: -1;
         }
 
         /* .barcode_cep img{
@@ -120,7 +117,7 @@
         }
 
         .sender {
-            font-size: 10pt;
+            font-size: 8pt;
         }
 
         hr {
@@ -136,7 +133,7 @@
 </head>
 <body>
     <div class="container">
-        <section>
+        <section style="height: 150px">
             <div class="col data_matrix">
                 <img src="data:image/png;base64, {{ datamatrix }}" alt="">
             </div>
@@ -146,20 +143,16 @@
             <div class="col">
                 <div class="fs-9">
                     <span>
+                        NF: {{ invoice }} <br>
+                        Pedido: {{ order_number }} <br>
                         Volume: {{ current_volume }}/{{ total_volume }} <br />
                         Peso (g): <strong>{{ weight }}</strong>
                     </span>
                 </div>
             </div>
-        </section>
-        
-        <section>
             <div class="barcode_tag">
                 <span class="fs-9"><strong>{{ tag }}</strong></span><br />
                 <img src="data:image/png;base64, {{ barcode_tag }}" alt="">
-            </div>
-            <div class="additional_services_id">
-        
             </div>
         </section>
         <section class="receiver_info">
@@ -172,21 +165,18 @@
                 <div class="dest_label">DESTINATÁRIO</div>
                 <div class="correios_logo"></div>
             </div>
-            <div class="recipient_info">
+            <div class="col recipient_info">
                 <p>{{ recipient_name }}</p>
                 <p>{{ recipient_address }}</p>
                 <p>{{ recipient_comp }} {{ recipient_neighborhood }}</p>
                 <p><strong>{{ recipient_zipcode }}</strong> <span>{{ recipient_city }}/{{recipient_uf}}</span></p>
             </div>
-        </section>
-        <section class='recipient_info_barcode'>
-            <div class="barcode_cep ml-2mm">
+            <div class="col barcode_cep">
                 <img src="data:image/png;base64, {{ barcode_cep }}" alt="">
             </div>
-            <div class="obs">{{ recipient_obs }}</div>
         </section>
         <hr>
-        <section class="sender ml-5mm">
+        <section class="sender">
             <p><strong>Remetente:</strong><span> Nome do remetente</span></p>
             <p>{{ sender_address }}</p>
             <p>{{ sender_comp }} <span>{{ sender_neighborhood }}</span></p>
