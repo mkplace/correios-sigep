@@ -38,7 +38,7 @@ class ObjectDimension(object):
                          diameter=2):
 
         if type_object == self.PACKAGE:
-            if height < 2 and width < 11 and length < 16:
+            if height < 2 or width < 11 or length < 16:
                 raise Exception(
                     'Width, height and length are mandatory for object package types')
         elif type_object == self.CYLINDER:
