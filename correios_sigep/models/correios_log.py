@@ -2,8 +2,19 @@ from collections import OrderedDict
 from ..utils import dict as Dict
 from ..utils.etree import parseDict
 from lxml import etree
+from ..models.plp import Plp
+from ..models.sender import Sender
+from ..models.postal_object import PostalObject
+
 class CorreiosLog:
     def __init__(self, plp, sender_obj):
+        
+        if not isinstance(plp, Plp):
+            raise Exception('parameter plp must have be an instance of Plp')
+
+        if not isinstance(sender_obj, Sender):
+            raise Exception('parameter sender_obj must have be an instance of Sender')
+
         self._correios_log = OrderedDict()
         self._correios_log['tipo_arquivo'] = 'Postagem',
         self._correios_log['versao_arquivo'] = 2.3,
@@ -16,6 +27,9 @@ class CorreiosLog:
         return self._correios_log
     
     def addPostalObject(self, postal_object):
+        if not isinstance(postal_object, PostalObject):
+            raise Exception('postal_object must have be an instance of PostalObject')
+            
         self._correios_log['objeto_postal'].append(postal_object)
 
     def getXml(self):
