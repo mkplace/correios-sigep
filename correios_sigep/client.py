@@ -26,7 +26,7 @@ class Client:
         self.username = username
         self.password = password
         self.WS = self.CORREIOS_WEBSERVICES[environment]
-
+        
     def _request(self, method, *args, **kwargs):
         history = HistoryPlugin()
         client = ZeepClient(self.WS[0], plugins=[history])
@@ -80,9 +80,10 @@ class Client:
             'idServico': kwargs['service'],
             'qtdEtiquetas': kwargs['qtd'],
         }
-
+        
         list_tags = self._request('solicitaEtiquetas', **params).split(',')
-        return list_tags
+        
+        return list_tags if params['qtdEtiquetas'] > 1 else list_tags[0]
 
     def get_checker_digit(self, zipcodes):
         params = {
