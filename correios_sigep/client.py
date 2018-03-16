@@ -83,7 +83,7 @@ class Client:
         
         list_tags = self._request('solicitaEtiquetas', **params).split(',')
         
-        return list_tags if params['qtdEtiquetas'] > 1 else list_tags[0]
+        return list_tags if params['qtdEtiquetas'] > 1 else [list_tags[0]]
 
     def get_checker_digit(self, zipcodes):
         params = {
