@@ -18,9 +18,10 @@ class Generator(object):
         tpl = self._env.get_template(file_name)
         return tpl.render(**params)
 
-    def makePdf(self, str, out=''):
+    def makePdf(self, paths, out=''):
         if not out:
             file = tempfile.NamedTemporaryFile(delete=False)
-
-        pdfkit.from_string(str, '{}'.format(file.name))
-        file.close()
+            pdfkit.from_file(paths, '{}'.format(file.name))
+            file.close()
+        else:
+            pdfkit.from_file(paths, out)

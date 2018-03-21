@@ -1,3 +1,4 @@
 # correios-sigep
 pip install pdfkit
-sudo apt-get install wkhtmltopdf
+sudo wget -P Downloads https://github.com/wkhtmltopdf/wkhtmltopdf/releases/download/0.12.1/wkhtmltox-0.12.1_linux-trusty-amd64.deb
+sudo gdebi wkhtmltox-0.12.1_linux-trusty-amd64.deb
