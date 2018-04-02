@@ -117,11 +117,13 @@
                         </tr>
                     </thead>
                     <tr>
-                        <td style="text-align: right">2</td>
-                        <td>04669 - PAC CONTRATO AGENCIA</td>
+                        {% for service in services %}
+                            <td style="text-align: right">{{ services[service]['qty'] }}</td>
+                            <td>{{ services[service]['name'] }}</td>
+                        {% endfor %}
                     </tr>
                     <tr>
-                        <td><strong>Total</strong><span style="float:right">2</span></td>
+                        <td><strong>Total</strong><span style="float:right">{{ total }}</span></td>
                         <td></td>
                     </tr>
                 </table>

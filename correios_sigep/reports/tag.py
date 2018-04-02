@@ -37,7 +37,7 @@ class Tag(Generator):
         self.str_datamatrix = self.generateDataMatrix(sender, postal_object, id_postcard)
         
         self.img_barcode_tag = b64encode(self.generate_barcode_128(postal_object.numero_etiqueta, 300, 66, 1))
-        self.img_barcode_zipcode = b64encode(self.generate_barcode_128(postal_object.nacional.cep_destinatario, 200, 66))
+        self.img_barcode_zipcode = b64encode(self.generate_barcode_128(postal_object.nacional.cep_destinatario, 220, 66))
 
     def mountStr(self, value):
         self.str_datamatrix += str (value)
@@ -88,6 +88,7 @@ class Tag(Generator):
             'recipient_zipcode': self.postal_object.nacional.cep_destinatario,
             'sender_address': '{}, {}'.format(self.sender.logradouro_remetente, self.sender.numero_remetente),
             'sender_comp': self.sender.complemento_remetente,
+            'sender_name': self.sender.nome_remetente,
             'sender_neighborhood': self.sender.bairro_remetente,
             'sender_zipcode': self.sender.cep_remetente,
             'sender_city': '{}/{}'.format(self.sender.cidade_remetente, self.sender.uf_remetente),
