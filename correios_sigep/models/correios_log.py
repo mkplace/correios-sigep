@@ -45,8 +45,8 @@ class CorreiosLog:
         # remetente = etree.Element('remetente')
         # objeto_postal = etree.Element('objeto_postal')
         
-        tipo_arquivo.text = self._correios_log['tipo_arquivo'] 
-        versao_arquivo.text = self._correios_log['versao_arquivo']
+        tipo_arquivo.text = unicode(self._correios_log['tipo_arquivo'])
+        versao_arquivo.text = unicode(self._correios_log['versao_arquivo'])
 
         # plp node
         etree_plp = etree.Element('plp')
@@ -58,11 +58,11 @@ class CorreiosLog:
         etree_nome_unidade_postagem = etree.Element('nome_unidade_postagem')
         etree_cartao_postagem = etree.Element('cartao_postagem')
 
-        etree_id_plp.text = plpobj.id_plp
-        etree_valor_global.text = plpobj.valor_global
-        etree_mcu_unidade_postagem.text = plpobj.mcu_unidade_postagem
-        etree_nome_unidade_postagem.text = plpobj.nome_unidade_postagem
-        etree_cartao_postagem.text = plpobj.cartao_postagem
+        etree_id_plp.text = unicode(plpobj.id_plp)
+        etree_valor_global.text = unicode(plpobj.valor_global)
+        etree_mcu_unidade_postagem.text = unicode(plpobj.mcu_unidade_postagem)
+        etree_nome_unidade_postagem.text = unicode(plpobj.nome_unidade_postagem)
+        etree_cartao_postagem.text = unicode(plpobj.cartao_postagem)
 
     
         etree_plp.append(etree_id_plp)
@@ -148,7 +148,7 @@ class CorreiosLog:
             etree_valor_cobrado = etree.Element('valor_cobrado')
 
 
-            etree_status_processamento.text = '0'
+            etree_status_processamento.text = unicode('0')
             etree_numero_etiqueta.text = unicode(objeto_postal_obj.numero_etiqueta)
             etree_codigo_servico_postagem.text = unicode(objeto_postal_obj.codigo_servico_postagem)
             etree_cubagem.text = unicode(objeto_postal_obj.cubagem)
@@ -230,11 +230,11 @@ class CorreiosLog:
 
             for servico_adicional in servico_adicional_obj.codigo_servico_adicional:
                 codigo_servico_adicional = etree.Element('codigo_servico_adicional')
-                codigo_servico_adicional.text = servico_adicional
+                codigo_servico_adicional.text = unicode(servico_adicional)
                 etree_servico_adicional.append(codigo_servico_adicional)
 
             etree_valor_declarado = etree.Element('valor_declarado')
-            etree_valor_declarado.text = servico_adicional_obj.valor_declarado
+            etree_valor_declarado.text = unicode(servico_adicional_obj.valor_declarado)
             etree_servico_adicional.append(etree_valor_declarado)
 
             #  objeto_postal.dimensao_objeto node
@@ -245,7 +245,7 @@ class CorreiosLog:
             etree_dimensao_comprimento = etree.Element('dimensao_comprimento')
             etree_dimensao_diametro = etree.Element('dimensao_diametro')
 
-            etree_tipo_objeto.text = objeto_postal_obj.dimensao_objeto.tipo_objeto
+            etree_tipo_objeto.text = unicode(objeto_postal_obj.dimensao_objeto.tipo_objeto)
             etree_dimensao_altura.text = unicode(objeto_postal_obj.dimensao_objeto.dimensao_altura) if objeto_postal_obj.dimensao_objeto.dimensao_altura != '' else ''
             etree_dimensao_largura.text = unicode(objeto_postal_obj.dimensao_objeto.dimensao_largura) if objeto_postal_obj.dimensao_objeto.dimensao_largura != '' else ''
             etree_dimensao_comprimento.text = unicode(objeto_postal_obj.dimensao_objeto.dimensao_comprimento) if objeto_postal_obj.dimensao_objeto.dimensao_comprimento != '' else ''
