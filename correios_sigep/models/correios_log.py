@@ -91,20 +91,20 @@ class CorreiosLog:
         etree_email_remetente = etree.Element('email_remetente')
 
         remetenteobj = self._correios_log['remetente']
-        etree_numero_contrato.text = remetenteobj.numero_contrato
-        etree_numero_diretoria.text = remetenteobj.numero_diretoria
-        etree_codigo_administrativo.text = remetenteobj.codigo_administrativo
-        etree_nome_remetente.text = etree.CDATA(unicode(remetenteobj.nome_remetente))
-        etree_logradouro_remetente.text = etree.CDATA(unicode(remetenteobj.logradouro_remetente))
-        etree_numero_remetente.text = etree.CDATA(unicode(remetenteobj.numero_remetente))
-        etree_complemento_remetente.text = etree.CDATA(unicode(remetenteobj.complemento_remetente))
-        etree_bairro_remetente.text = etree.CDATA(unicode(remetenteobj.bairro_remetente))
-        etree_cep_remetente.text = etree.CDATA(unicode(remetenteobj.cep_remetente))
-        etree_cidade_remetente.text = etree.CDATA(unicode(remetenteobj.cidade_remetente))
-        etree_uf_remetente.text = etree.CDATA(unicode(remetenteobj.uf_remetente))
-        etree_telefone_remetente.text = etree.CDATA(unicode(remetenteobj.telefone_remetente))
-        etree_fax_remetente.text = etree.CDATA(unicode(remetenteobj.fax_remetente))
-        etree_email_remetente.text = etree.CDATA(unicode(remetenteobj.email_remetente))
+        etree_numero_contrato.text = unicode(remetenteobj.numero_contrato)
+        etree_numero_diretoria.text = unicode(remetenteobj.numero_diretoria)
+        etree_codigo_administrativo.text = unicode(remetenteobj.codigo_administrativo)
+        etree_nome_remetente.text = etree.CDATA(unicode(remetenteobj.nome_remetente)) if remetenteobj.nome_remetente != '' else None
+        etree_logradouro_remetente.text = etree.CDATA(unicode(remetenteobj.logradouro_remetente)) if remetenteobj.logradouro_remetente != '' else None
+        etree_numero_remetente.text = etree.CDATA(unicode(remetenteobj.numero_remetente)) if remetenteobj.numero_remetente != '' else None
+        etree_complemento_remetente.text = etree.CDATA(unicode(remetenteobj.complemento_remetente)) if remetenteobj.complemento_remetente != '' else None
+        etree_bairro_remetente.text = etree.CDATA(unicode(remetenteobj.bairro_remetente)) if remetenteobj.bairro_remetente != '' else None
+        etree_cep_remetente.text = etree.CDATA(unicode(remetenteobj.cep_remetente)) if remetenteobj.cep_remetente != '' else None
+        etree_cidade_remetente.text = etree.CDATA(unicode(remetenteobj.cidade_remetente)) if remetenteobj.cidade_remetente != '' else None
+        etree_uf_remetente.text = etree.CDATA(unicode(remetenteobj.uf_remetente)) if remetenteobj.uf_remetente != '' else None
+        etree_telefone_remetente.text = etree.CDATA(unicode(remetenteobj.telefone_remetente)) if remetenteobj.telefone_remetente != '' else None
+        etree_fax_remetente.text = etree.CDATA(unicode(remetenteobj.fax_remetente)) if remetenteobj.fax_remetente != '' else None
+        etree_email_remetente.text = etree.CDATA(unicode(remetenteobj.email_remetente)) if remetenteobj.email_remetente != '' else None
 
         etree_remetente.append(etree_numero_contrato)
         etree_remetente.append(etree_numero_diretoria)
@@ -149,12 +149,12 @@ class CorreiosLog:
 
 
             etree_status_processamento.text = '0'
-            etree_numero_etiqueta.text = objeto_postal_obj.numero_etiqueta
-            etree_codigo_servico_postagem.text = objeto_postal_obj.codigo_servico_postagem
-            etree_cubagem.text = objeto_postal_obj.cubagem
+            etree_numero_etiqueta.text = unicode(objeto_postal_obj.numero_etiqueta)
+            etree_codigo_servico_postagem.text = unicode(objeto_postal_obj.codigo_servico_postagem)
+            etree_cubagem.text = unicode(objeto_postal_obj.cubagem)
             etree_peso.text = unicode(objeto_postal_obj.peso)
-            etree_rt1.text = etree.CDATA(unicode(objeto_postal_obj.rt1))
-            etree_rt2.text = etree.CDATA(unicode(objeto_postal_obj.rt2))
+            etree_rt1.text = etree.CDATA(unicode(objeto_postal_obj.rt1)) if objeto_postal_obj.rt1 != '' else None
+            etree_rt2.text = etree.CDATA(unicode(objeto_postal_obj.rt2)) if objeto_postal_obj.rt2 != '' else None
 
             #  objeto_postal.destinatario node
             destinatario_obj = objeto_postal_obj.destinatario
@@ -167,13 +167,13 @@ class CorreiosLog:
             etree_complemento_destinatario = etree.Element('complemento_destinatario')
             etree_numero_end_destinatario = etree.Element('numero_end_destinatario')
 
-            etree_nome_destinatario.text = etree.CDATA(unicode(destinatario_obj.nome_destinatario))
-            etree_telefone_destinatario.text = etree.CDATA(unicode(destinatario_obj.telefone_destinatario))
-            etree_celular_destinatario.text = etree.CDATA(unicode(destinatario_obj.celular_destinatario))
-            etree_email_destinatario.text = etree.CDATA(unicode(destinatario_obj.email_destinatario))
-            etree_logradouro_destinatario.text = etree.CDATA(unicode(destinatario_obj.logradouro_destinatario))
-            etree_complemento_destinatario.text = etree.CDATA(unicode(destinatario_obj.complemento_destinatario))
-            etree_numero_end_destinatario.text = etree.CDATA(unicode(destinatario_obj.numero_end_destinatario))
+            etree_nome_destinatario.text = etree.CDATA(unicode(destinatario_obj.nome_destinatario)) if destinatario_obj.nome_destinatario != '' else ''
+            etree_telefone_destinatario.text = etree.CDATA(unicode(destinatario_obj.telefone_destinatario)) if destinatario_obj.telefone_destinatario != '' else ''
+            etree_celular_destinatario.text = etree.CDATA(unicode(destinatario_obj.celular_destinatario)) if destinatario_obj.celular_destinatario != '' else ''
+            etree_email_destinatario.text = etree.CDATA(unicode(destinatario_obj.email_destinatario)) if destinatario_obj.email_destinatario != '' else ''
+            etree_logradouro_destinatario.text = etree.CDATA(unicode(destinatario_obj.logradouro_destinatario)) if destinatario_obj.logradouro_destinatario != '' else ''
+            etree_complemento_destinatario.text = etree.CDATA(unicode(destinatario_obj.complemento_destinatario)) if destinatario_obj.complemento_destinatario != '' else ''
+            etree_numero_end_destinatario.text = etree.CDATA(unicode(destinatario_obj.numero_end_destinatario)) if destinatario_obj.numero_end_destinatario != '' else ''
 
             etree_destinatario.append(etree_nome_destinatario)
             etree_destinatario.append(etree_telefone_destinatario)
@@ -199,18 +199,18 @@ class CorreiosLog:
             etree_serie_nota_fiscal = etree.Element('serie_nota_fiscal')
             etree_valor_nota_fiscal = etree.Element('valor_nota_fiscal')
 
-            etree_bairro_destinatario.text = etree.CDATA(unicode(nacional_obj.bairro_destinatario))
-            etree_cidade_destinatario.text = etree.CDATA(unicode(nacional_obj.cidade_destinatario))
-            etree_uf_destinatario.text = etree.CDATA(unicode(nacional_obj.uf_destinatario))
-            etree_cep_destinatario.text = etree.CDATA(unicode(nacional_obj.cep_destinatario))
-            etree_numero_nota_fiscal.text = unicode(nacional_obj.numero_nota_fiscal)
-            etree_descricao_objeto.text = etree.CDATA(unicode(nacional_obj.descricao_objeto))
-            etree_valor_a_cobrar.text = unicode(nacional_obj.valor_a_cobrar)
-            etree_natureza_nota_fiscal.text = etree.CDATA(unicode(nacional_obj.natureza_nota_fiscal))
-            etree_codigo_usuario_postal.text = etree.CDATA(unicode(nacional_obj.codigo_usuario_postal))
-            etree_centro_custo_cliente.text = etree.CDATA(unicode(nacional_obj.centro_custo_cliente))
-            etree_serie_nota_fiscal.text = etree.CDATA(unicode(nacional_obj.serie_nota_fiscal))
-            etree_valor_nota_fiscal.text = unicode(nacional_obj.valor_nota_fiscal)
+            etree_bairro_destinatario.text = etree.CDATA(unicode(nacional_obj.bairro_destinatario)) if nacional_obj.bairro_destinatario != '' else ''
+            etree_cidade_destinatario.text = etree.CDATA(unicode(nacional_obj.cidade_destinatario)) if nacional_obj.cidade_destinatario != '' else ''
+            etree_uf_destinatario.text = etree.CDATA(unicode(nacional_obj.uf_destinatario)) if nacional_obj.uf_destinatario != '' else ''
+            etree_cep_destinatario.text = etree.CDATA(unicode(nacional_obj.cep_destinatario)) if nacional_obj.cep_destinatario != '' else ''
+            etree_numero_nota_fiscal.text = unicode(nacional_obj.numero_nota_fiscal) if nacional_obj.numero_nota_fiscal != '' else ''
+            etree_descricao_objeto.text = etree.CDATA(unicode(nacional_obj.descricao_objeto)) if nacional_obj.descricao_objeto != '' else ''
+            etree_valor_a_cobrar.text = unicode(nacional_obj.valor_a_cobrar) if nacional_obj.valor_a_cobrar != '' else ''
+            etree_natureza_nota_fiscal.text = etree.CDATA(unicode(nacional_obj.natureza_nota_fiscal)) if nacional_obj.natureza_nota_fiscal != '' else ''
+            etree_codigo_usuario_postal.text = etree.CDATA(unicode(nacional_obj.codigo_usuario_postal)) if nacional_obj.codigo_usuario_postal != '' else ''
+            etree_centro_custo_cliente.text = etree.CDATA(unicode(nacional_obj.centro_custo_cliente)) if nacional_obj.centro_custo_cliente != '' else ''
+            etree_serie_nota_fiscal.text = etree.CDATA(unicode(nacional_obj.serie_nota_fiscal)) if nacional_obj.serie_nota_fiscal != '' else ''
+            etree_valor_nota_fiscal.text = unicode(nacional_obj.valor_nota_fiscal) if nacional_obj.valor_nota_fiscal !='' else ''
 
             etree_nacional.append(etree_bairro_destinatario)
             etree_nacional.append(etree_cidade_destinatario)
@@ -246,10 +246,10 @@ class CorreiosLog:
             etree_dimensao_diametro = etree.Element('dimensao_diametro')
 
             etree_tipo_objeto.text = objeto_postal_obj.dimensao_objeto.tipo_objeto
-            etree_dimensao_altura.text = unicode(objeto_postal_obj.dimensao_objeto.dimensao_altura)
-            etree_dimensao_largura.text = unicode(objeto_postal_obj.dimensao_objeto.dimensao_largura)
-            etree_dimensao_comprimento.text = unicode(objeto_postal_obj.dimensao_objeto.dimensao_comprimento)
-            etree_dimensao_diametro.text = unicode(objeto_postal_obj.dimensao_objeto.dimensao_diametro)
+            etree_dimensao_altura.text = unicode(objeto_postal_obj.dimensao_objeto.dimensao_altura) if objeto_postal_obj.dimensao_objeto.dimensao_altura != '' else ''
+            etree_dimensao_largura.text = unicode(objeto_postal_obj.dimensao_objeto.dimensao_largura) if objeto_postal_obj.dimensao_objeto.dimensao_largura != '' else ''
+            etree_dimensao_comprimento.text = unicode(objeto_postal_obj.dimensao_objeto.dimensao_comprimento) if objeto_postal_obj.dimensao_objeto.dimensao_comprimento != '' else ''
+            etree_dimensao_diametro.text = unicode(objeto_postal_obj.dimensao_objeto.dimensao_diametro) if objeto_postal_obj.dimensao_objeto.dimensao_diametro != '' else ''
             
             etree_dimensao_objeto.append(etree_tipo_objeto)
             etree_dimensao_objeto.append(etree_dimensao_altura)
