@@ -9,10 +9,10 @@ class ObjectDimension(object):
     
     def __init__(self,
                  type_object,
-                 height=0,
-                 width=0,
-                 length=0,
-                 diameter=0):
+                 height=2,
+                 width=11,
+                 length=16,
+                 diameter=2):
 
 
         self._validate_types(type_object)

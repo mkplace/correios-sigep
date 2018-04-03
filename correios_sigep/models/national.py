@@ -8,7 +8,6 @@ class National(object):
         self.numero_nota_fiscal = invoice_number
         self.descricao_objeto = object_description
         self.valor_a_cobrar = number_format(value_charged)
-
         self.natureza_nota_fiscal = ''
         self.codigo_usuario_postal = ''
         self.centro_custo_cliente  = ''

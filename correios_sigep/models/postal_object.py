@@ -20,3 +20,5 @@ class PostalObject(object):
         self.servico_adicional = additional_service
         self.dimensao_objeto = object_dimension
         self.valor_cobrado = ''
+
+# 2018361049166

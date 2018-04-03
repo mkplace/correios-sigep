@@ -19,7 +19,7 @@ class Sender(object):
 
     @property
     def numero_contrato(self):
-        return self.numero_contrato
+        return self._numero_contrato
 
     @numero_contrato.setter
     def numero_contrato(self, value):
