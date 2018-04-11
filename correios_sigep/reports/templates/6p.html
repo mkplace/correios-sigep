@@ -143,7 +143,6 @@
             <div class="col">
                 <div class="fs-9">
                     <span>
-                        NF: {{ invoice }} <br>
                         Pedido: {{ order_number }} <br>
                         Volume: {{ current_volume }}/{{ total_volume }} <br />
                         Peso (g): <strong>{{ weight }}</strong>
@@ -180,7 +179,7 @@
             <p><strong>Remetente:</strong><span> Nome do remetente</span></p>
             <p>{{ sender_address }}</p>
             <p>{{ sender_comp }} <span>{{ sender_neighborhood }}</span></p>
-            <p><strong>{{ sender_zipcode }}</strong> <span>{{ sender_city }}-{{ sender_uf }}</span></p>
+            <p><strong>{{ sender_zipcode }}</strong> <span>{{ sender_city }}</span></p>
         </section>
     </div>
 </body>
